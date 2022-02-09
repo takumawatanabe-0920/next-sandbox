@@ -1,5 +1,5 @@
-import * as React from 'react'
-import ListItem from './ListItem'
+import React from 'react'
+import ListItem from 'src/components/ListItem'
 import { User } from '../interfaces'
 
 type Props = {
