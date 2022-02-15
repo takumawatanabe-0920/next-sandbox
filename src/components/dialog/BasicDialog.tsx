@@ -1,11 +1,73 @@
 import React from 'react'
-import { Dialog, withMobileDialog } from '@material-ui/core'
+import {
+  Dialog,
+  withMobileDialog,
+  DialogTitle,
+  makeStyles,
+  DialogActions,
+  Button,
+} from '@material-ui/core'
 
-const BasicDialog = ({ muiClasses, open, onClose, children }) => (
-  <Dialog classes={muiClasses} open={open} onClose={onClose}>
-    {children}
-  </Dialog>
-)
+const useStyles = makeStyles(theme => ({
+  title: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+  annotation: {
+    fontSize: 14,
+    color: theme.palette.grey[700],
+    marginTop: 8,
+  },
+  formSection: {
+    marginTop: 8,
+    marginBottom: 12,
+    color: theme.palette.grey[800],
+    fontSize: 18,
+  },
+}))
+
+type BasicDialog = {
+  title: string
+  muiClasses?: string
+  open: boolean
+  onClose: () => void
+  onSubmit?: () => void
+  submitText: string
+}
+
+const BasicDialog = ({
+  title = '',
+  muiClasses,
+  open,
+  onClose,
+  children,
+  onSubmit,
+  submitText = '登録する',
+}) => {
+  const classes = useStyles()
+  return (
+    <Dialog classes={muiClasses} open={open} onClose={onClose}>
+      <DialogTitle className={classes.title}>{title}</DialogTitle>
+      {children}
+      <DialogActions>
+        <Button onClick={onClose}>戻る</Button>
+        <Button
+          variant='contained'
+          color='primary'
+          type='submit'
+          onClick={onSubmit}
+        >
+          {submitText}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
 
 const noop = () => {
   /** noop */
