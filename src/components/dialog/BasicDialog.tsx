@@ -38,6 +38,8 @@ type BasicDialog = {
   onClose: () => void
   onSubmit?: () => void
   submitText: string
+  closeDisabled?: boolean
+  submitDisabled?: boolean
 }
 
 const BasicDialog = ({
@@ -48,6 +50,8 @@ const BasicDialog = ({
   children,
   onSubmit,
   submitText = '登録する',
+  closeDisabled,
+  submitDisabled,
 }) => {
   const classes = useStyles()
   return (
@@ -55,12 +59,15 @@ const BasicDialog = ({
       <DialogTitle className={classes.title}>{title}</DialogTitle>
       {children}
       <DialogActions>
-        <Button onClick={onClose}>戻る</Button>
+        <Button onClick={onClose} disabled={closeDisabled}>
+          戻る
+        </Button>
         <Button
           variant='contained'
           color='primary'
           type='submit'
           onClick={onSubmit}
+          disabled={submitDisabled}
         >
           {submitText}
         </Button>

@@ -1,27 +1,30 @@
 import React from 'react'
-import { diagnosisData } from 'src/config/diagnosisData'
+import { diagnosisDataList } from 'src/config/diagnosisData'
+import { TextField } from '@material-ui/core'
 
-type DialogContentProps = {}
+type DialogContentProps = {
+  diagnosisData: typeof diagnosisDataList[0]
+  initialValue: any
+}
 const DialogContent: React.FC<DialogContentProps> = props => {
-  const {} = props
+  const { diagnosisData, initialValue } = props
+  console.log({ initialValue })
   return (
     <>
-      {diagnosisData.map((data, idx) => (
-        <div key={idx}>
-          <h3>{data.title}</h3>
-          {data.type === 'single' ? (
-            <div></div>
-          ) : data.type === 'multiple' ? (
-            <></>
-          ) : data.type === 'input' ? (
-            <></>
-          ) : data.type === 'email' ? (
-            <></>
-          ) : data.type === 'phone' ? (
-            <></>
-          ) : null}
-        </div>
-      ))}
+      <div>
+        <h3>{diagnosisData.title}</h3>
+        {diagnosisData.type === 'radio' ? (
+          <div></div>
+        ) : diagnosisData.type === 'checkbox' ? (
+          <></>
+        ) : diagnosisData.type === 'input' ? (
+          <TextField></TextField>
+        ) : diagnosisData.type === 'email' ? (
+          <TextField></TextField>
+        ) : diagnosisData.type === 'phone' ? (
+          <TextField></TextField>
+        ) : null}
+      </div>
     </>
   )
 }

@@ -1,6 +1,6 @@
-const diagnosisData = [
+const diagnosisDataList = [
   {
-    type: 'single',
+    type: 'radio',
     title: 'あなたは一目惚れをしやすいですか？',
     answerList: [
       { text: 'はい', type: 'passion', point: 20 },
@@ -9,7 +9,7 @@ const diagnosisData = [
     ],
   },
   {
-    type: 'multiple',
+    type: 'checkbox',
     title: 'あなたは恋愛で何を重視しますか？',
     answerList: [
       { text: '顔', type: 'passion', point: 20 },
@@ -19,7 +19,7 @@ const diagnosisData = [
     ],
   },
   {
-    type: 'multiple',
+    type: 'checkbox',
     title: 'あなたのラインの頻度は週にどのくらいですか？',
     answerList: [
       { text: '毎日10通以上', type: 'passion', point: 30 },
@@ -29,7 +29,7 @@ const diagnosisData = [
     ],
   },
   {
-    type: 'single',
+    type: 'radio',
     title: 'あなたは仲良くなるまで時間がかかるタイプですか？',
     answerList: [
       { text: 'はい', type: 'feeling', point: 20 },
@@ -40,6 +40,6 @@ const diagnosisData = [
   { type: 'input', title: 'あなたの名前を入力してください？' },
   { type: 'email', title: 'あなたのメールアドレスを入力してください？' },
   { type: 'phone', title: 'あなたの電話番号を入力してください？' },
-]
+] as const
 
-export { diagnosisData }
+export { diagnosisDataList }
