@@ -52,8 +52,24 @@ const useHook = () => {
   const handleInput = () => {}
   const handlePhone = () => {}
   const handleEmail = () => {}
-  const handleSingle = () => {}
-  const handleMultiple = () => {}
+  const handleRadio = args => {
+    console.log({ args })
+  }
+  const handleCheckbox = args => {
+    console.log({ args })
+  }
+
+  const handler = {
+    radio: handleRadio,
+    checkbox: handleCheckbox,
+    input: handleInput,
+    email: handleEmail,
+    phone: handlePhone,
+    // @ts-expect-error ts-migrate(2464) FIXME: A computed property name must be of type 'string',... Remove this comment to see the full error message
+    [undefined]: () => {
+      // empty
+    },
+  }
 
   return {
     useOnNext,
@@ -61,6 +77,7 @@ const useHook = () => {
     currentVal,
     index,
     answers,
+    handler,
   }
 }
 

@@ -11,7 +11,7 @@ type DialogProps = {
 }
 const Dialog: React.FC<DialogProps> = props => {
   const { open, onClose, onSubmit } = props
-  const { index, answers, currentVal, useOnBack, useOnNext } =
+  const { index, answers, currentVal, useOnBack, useOnNext, handler } =
     useDiagnosisHook()
 
   const diagnosisData = diagnosisDataList[index] as typeof diagnosisDataList[0]
@@ -35,6 +35,7 @@ const Dialog: React.FC<DialogProps> = props => {
       <DialogContent
         diagnosisData={diagnosisData}
         initialValue={answers[index]}
+        handle={handler[diagnosisData.type]}
       />
     </BasicDialog>
   )
