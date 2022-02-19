@@ -56,6 +56,7 @@ const DialogContent: React.FC<DialogContentProps> = props => {
             label={diagnosisData.input?.label}
             multiline={diagnosisData.input?.multiline}
             required={diagnosisData.input?.required}
+            value={initialValue}
             onChange={e =>
               handle({
                 question_id: diagnosisData._id,
@@ -68,6 +69,7 @@ const DialogContent: React.FC<DialogContentProps> = props => {
           <TextInput
             label={diagnosisData.input?.label}
             required={diagnosisData.input?.required}
+            value={initialValue}
             onChange={e =>
               handle({
                 question_id: diagnosisData._id,
@@ -81,6 +83,7 @@ const DialogContent: React.FC<DialogContentProps> = props => {
             label={diagnosisData.input?.label}
             required={diagnosisData.input?.required}
             type='number'
+            value={initialValue}
             onChange={e =>
               handle({
                 question_id: diagnosisData._id,

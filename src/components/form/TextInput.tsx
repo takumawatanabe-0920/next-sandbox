@@ -10,6 +10,7 @@ type TextInputProsp = {
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void
+  value: string
 }
 
 const TextInput: React.FC<TextInputProsp> = props => {
@@ -20,6 +21,7 @@ const TextInput: React.FC<TextInputProsp> = props => {
     multiline = false,
     variant = 'outlined',
     onChange,
+    value,
   } = props
 
   return (
@@ -31,6 +33,7 @@ const TextInput: React.FC<TextInputProsp> = props => {
       multiline={multiline}
       required={required}
       onChange={onChange}
+      value={value}
     />
   )
 }
