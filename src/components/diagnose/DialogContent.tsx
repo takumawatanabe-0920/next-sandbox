@@ -5,22 +5,23 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  FormGroup,
-  Checkbox,
 } from '@material-ui/core'
+import TextInput from 'src/components/form/TextInput'
 
 type DialogContentProps = {
   diagnosisData: typeof diagnosisDataList[0]
   initialValue: any
   handle: any
+  currentVal: any
 }
 const DialogContent: React.FC<DialogContentProps> = props => {
-  const { diagnosisData, initialValue, handle } = props
+  const { diagnosisData, initialValue, handle, currentVal } = props
 
   const formatPoint = (value: string) => {
     if (!diagnosisData?.answerList || !value) return null
     return diagnosisData.answerList.find(answer => answer.type === value)?.point
   }
+  console.log({ currentVal, initialValue })
 
   return (
     <>
@@ -29,11 +30,12 @@ const DialogContent: React.FC<DialogContentProps> = props => {
         {diagnosisData.type === 'radio' ? (
           <div>
             <RadioGroup
-              aria-label='gender'
               value={initialValue}
               name='radio-buttons-group'
               onChange={e =>
                 handle({
+                  question_id: diagnosisData._id,
+                  type: diagnosisData.type,
                   value: e.target.value,
                   point: formatPoint(e.target.value),
                 })
@@ -41,7 +43,7 @@ const DialogContent: React.FC<DialogContentProps> = props => {
             >
               {diagnosisData.answerList.map((answer, idx) => (
                 <FormControlLabel
-                  key={idx}
+                  key={`${answer.id}-${idx}`}
                   value={answer.type}
                   control={<Radio />}
                   label={answer.text}
@@ -49,26 +51,44 @@ const DialogContent: React.FC<DialogContentProps> = props => {
               ))}
             </RadioGroup>
           </div>
-        ) : diagnosisData.type === 'checkbox' ? (
-          <div>
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label='Label'
-              />
-              <FormControlLabel
-                disabled
-                control={<Checkbox />}
-                label='Disabled'
-              />
-            </FormGroup>
-          </div>
         ) : diagnosisData.type === 'input' ? (
-          <TextField></TextField>
+          <TextInput
+            label={diagnosisData.input?.label}
+            multiline={diagnosisData.input?.multiline}
+            required={diagnosisData.input?.required}
+            onChange={e =>
+              handle({
+                question_id: diagnosisData._id,
+                type: diagnosisData.type,
+                value: e.target.value,
+              })
+            }
+          />
         ) : diagnosisData.type === 'email' ? (
-          <TextField></TextField>
+          <TextInput
+            label={diagnosisData.input?.label}
+            required={diagnosisData.input?.required}
+            onChange={e =>
+              handle({
+                question_id: diagnosisData._id,
+                type: diagnosisData.type,
+                value: e.target.value,
+              })
+            }
+          />
         ) : diagnosisData.type === 'phone' ? (
-          <TextField></TextField>
+          <TextInput
+            label={diagnosisData.input?.label}
+            required={diagnosisData.input?.required}
+            type='number'
+            onChange={e =>
+              handle({
+                question_id: diagnosisData._id,
+                type: diagnosisData.type,
+                value: e.target.value,
+              })
+            }
+          />
         ) : null}
       </div>
     </>

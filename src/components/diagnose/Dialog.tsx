@@ -35,6 +35,7 @@ const Dialog: React.FC<DialogProps> = props => {
       <DialogContent
         diagnosisData={diagnosisData}
         initialValue={answers[index]}
+        currentVal={currentVal}
         handle={handler[diagnosisData.type]}
       />
     </BasicDialog>
