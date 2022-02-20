@@ -8,6 +8,7 @@ const diagnosisDataList = [
       { id: 'random2', text: 'いいえ', type: 'sincerity', point: 10 },
       { id: 'random3', text: 'どちらでもない', type: 'reality', point: 10 },
     ],
+    input: {},
   },
   {
     _id: '1',
@@ -18,6 +19,7 @@ const diagnosisDataList = [
       { id: 'random5', text: 'いいえ', type: 'sincerity', point: 20 },
       { id: 'random6', text: 'どちらでもない', type: 'reality', point: 10 },
     ],
+    input: {},
   },
   {
     _id: '2',
@@ -28,6 +30,7 @@ const diagnosisDataList = [
       { id: 'random8', text: 'いいえ', type: 'passion', point: 10 },
       { id: 'random9', text: 'どちらでもない', type: 'reality', point: 10 },
     ],
+    input: {},
   },
   {
     _id: '3',

@@ -7,11 +7,15 @@ import {
   Radio,
 } from '@material-ui/core'
 import TextInput from 'src/components/form/TextInput'
-
+import { useDiagnosisHook } from 'src/hooks'
+type ValueOf<T> = T[keyof T]
+type Handle = ValueOf<ReturnType<typeof useDiagnosisHook>['handler']>
 type DialogContentProps = {
   diagnosisData: typeof diagnosisDataList[0]
   initialValue: any
-  handle: any
+  handle: (
+    args: Parameters<Handle>[0] & { point?: number }
+  ) => ReturnType<Handle>
   currentVal: any
 }
 const DialogContent: React.FC<DialogContentProps> = props => {
@@ -21,7 +25,6 @@ const DialogContent: React.FC<DialogContentProps> = props => {
     if (!diagnosisData?.answerList || !value) return null
     return diagnosisData.answerList.find(answer => answer.type === value)?.point
   }
-  console.log({ currentVal, initialValue })
 
   return (
     <>
@@ -53,9 +56,9 @@ const DialogContent: React.FC<DialogContentProps> = props => {
           </div>
         ) : diagnosisData.type === 'input' ? (
           <TextInput
-            label={diagnosisData.input?.label}
-            multiline={diagnosisData.input?.multiline}
-            required={diagnosisData.input?.required}
+            label={(diagnosisData.input as any)?.label}
+            multiline={(diagnosisData.input as any)?.multiline}
+            required={(diagnosisData.input as any)?.required}
             value={initialValue}
             onChange={e =>
               handle({
@@ -67,8 +70,8 @@ const DialogContent: React.FC<DialogContentProps> = props => {
           />
         ) : diagnosisData.type === 'email' ? (
           <TextInput
-            label={diagnosisData.input?.label}
-            required={diagnosisData.input?.required}
+            label={(diagnosisData.input as any)?.label}
+            required={(diagnosisData.input as any)?.required}
             value={initialValue}
             onChange={e =>
               handle({
@@ -80,8 +83,8 @@ const DialogContent: React.FC<DialogContentProps> = props => {
           />
         ) : diagnosisData.type === 'phone' ? (
           <TextInput
-            label={diagnosisData.input?.label}
-            required={diagnosisData.input?.required}
+            label={(diagnosisData.input as any)?.label}
+            required={(diagnosisData.input as any)?.required}
             type='number'
             value={initialValue}
             onChange={e =>

@@ -96,10 +96,6 @@ const useHook = () => {
     input: handleInput,
     email: handleEmail,
     phone: handlePhone,
-    // @ts-expect-error ts-migrate(2464) FIXME: A computed property name must be of type 'string',... Remove this comment to see the full error message
-    [undefined]: () => {
-      // empty
-    },
     // checkbox: handleCheckbox,
   }
 
