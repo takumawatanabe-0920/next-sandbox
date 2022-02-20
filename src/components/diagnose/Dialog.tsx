@@ -11,21 +11,20 @@ type DialogProps = {
 }
 const Dialog: React.FC<DialogProps> = props => {
   const { open, onClose, onSubmit } = props
-  const { index, answers, currentVal, useOnBack, useOnNext, handler } =
+  const { index, answers, currentVal, onNext, onBack, handler } =
     useDiagnosisHook()
-
   const diagnosisData = diagnosisDataList[index] as typeof diagnosisDataList[0]
 
   return (
     <BasicDialog
       open={open}
       onClose={() =>
-        useOnBack({
+        onBack({
           onClose,
         })
       }
       onSubmit={() =>
-        useOnNext({
+        onNext({
           onSubmit,
         })
       }

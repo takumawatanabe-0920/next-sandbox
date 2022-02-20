@@ -27,7 +27,7 @@ const useHook = () => {
   const [answers, setAnswers] = useState([])
   const [currentVal, setCurrentVal] = useState(null)
 
-  const useOnNext = useCallback(
+  const onNext = useCallback(
     args => {
       const { onSubmit } = args
       const _length = diagnosisDataList.length
@@ -52,7 +52,7 @@ const useHook = () => {
     [index, answers, currentVal]
   )
 
-  const useOnBack = useCallback(
+  const onBack = useCallback(
     args => {
       const { onClose } = args
       try {
@@ -100,8 +100,8 @@ const useHook = () => {
   }
 
   return {
-    useOnNext,
-    useOnBack,
+    onNext,
+    onBack,
     currentVal,
     index,
     answers,

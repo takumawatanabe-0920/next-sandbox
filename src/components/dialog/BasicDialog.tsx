@@ -33,16 +33,17 @@ const useStyles = makeStyles(theme => ({
 
 type BasicDialog = {
   title: string
-  muiClasses?: string
+  muiClasses?: any
   open: boolean
   onClose: () => void
-  onSubmit?: () => void
+  onSubmit: () => void
   submitText: string
   closeDisabled?: boolean
   submitDisabled?: boolean
+  children: React.ReactNode
 }
 
-const BasicDialog = ({
+const BasicDialog: React.FC<BasicDialog> = ({
   title = '',
   muiClasses,
   open,

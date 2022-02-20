@@ -1,11 +1,6 @@
 import React from 'react'
 import { diagnosisDataList } from 'src/config/diagnosisData'
-import {
-  TextField,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-} from '@material-ui/core'
+import { RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
 import TextInput from 'src/components/form/TextInput'
 import { useDiagnosisHook } from 'src/hooks'
 type ValueOf<T> = T[keyof T]
