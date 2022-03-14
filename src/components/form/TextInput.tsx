@@ -11,6 +11,7 @@ type TextInputProsp = {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void
   value: string
+  name?: string
 }
 
 const TextInput: React.FC<TextInputProsp> = props => {
@@ -22,10 +23,12 @@ const TextInput: React.FC<TextInputProsp> = props => {
     variant = 'outlined',
     onChange,
     value,
+    name,
   } = props
 
   return (
     <TextField
+      name={name}
       id='outlined-basic'
       variant={variant}
       label={label}

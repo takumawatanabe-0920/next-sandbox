@@ -15,7 +15,7 @@ interface HandleEmailArgs extends HandleBaseArgs {
 }
 
 interface HandlePhoneArgs extends HandleBaseArgs {
-  value: number
+  value: string
 }
 
 interface HandleInputArgs extends HandleBaseArgs {
@@ -35,15 +35,16 @@ const useHook = () => {
         if (index > _length - 1) {
           throw new Error('エラーが発生しました。')
         }
-        if (index === _length - 1) {
-          return onSubmit()
-        }
         if (currentVal) {
           answers[index] = currentVal
           setAnswers([...answers])
         }
-        setIndex(index + 1)
-        setCurrentVal(null)
+        const nextStep = index + 1
+        if (nextStep === _length - 1) {
+          return onSubmit()
+        }
+        setIndex(nextStep)
+        setCurrentVal(answers[nextStep])
       } catch (e) {
         console.error({ e })
       }
@@ -62,30 +63,31 @@ const useHook = () => {
         if (index === 0) {
           return onClose()
         }
-        setIndex(index - 1)
-        setCurrentVal(null)
+        const backStep = index - 1
+        setIndex(backStep)
+        setCurrentVal(answers[backStep])
       } catch (e) {
         console.error({ e })
       }
     },
-    [index]
+    [index, answers]
   )
 
   const handleInput = (args: HandleInputArgs) => {
-    console.log({ args })
+    console.log({ handleInput: args })
     setCurrentVal(args)
   }
   const handlePhone = (args: HandlePhoneArgs) => {
-    console.log({ args })
+    console.log({ handlePhone: args })
     setCurrentVal(args)
   }
   const handleEmail = (args: HandleEmailArgs) => {
-    console.log({ args })
+    console.log({ handleEmail: args })
     setCurrentVal(args)
   }
 
   const handleRadio = (args: HandleRadioArgs) => {
-    console.log({ args })
+    console.log({ handleRadio: args })
     setCurrentVal(args)
   }
   // TODO: いつか
@@ -96,7 +98,6 @@ const useHook = () => {
     input: handleInput,
     email: handleEmail,
     phone: handlePhone,
-    // checkbox: handleCheckbox,
   }
 
   return {

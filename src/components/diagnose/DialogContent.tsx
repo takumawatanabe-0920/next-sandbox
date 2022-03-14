@@ -7,14 +7,18 @@ type ValueOf<T> = T[keyof T]
 type Handle = ValueOf<ReturnType<typeof useDiagnosisHook>['handler']>
 type DialogContentProps = {
   diagnosisData: typeof diagnosisDataList[0]
-  initialValue: any
   handle: (
     args: Parameters<Handle>[0] & { point?: number }
   ) => ReturnType<Handle>
-  currentVal: any
+  currentVal: Parameters<Handle>[0]
 }
+
 const DialogContent: React.FC<DialogContentProps> = props => {
-  const { diagnosisData, initialValue, handle, currentVal } = props
+  const {
+    diagnosisData,
+    handle,
+    currentVal = {} as Parameters<Handle>[0],
+  } = props
 
   const formatPoint = (value: string) => {
     if (!diagnosisData?.answerList || !value) return null
@@ -28,7 +32,7 @@ const DialogContent: React.FC<DialogContentProps> = props => {
         {diagnosisData.type === 'radio' ? (
           <div>
             <RadioGroup
-              value={initialValue}
+              value={currentVal.value}
               name='radio-buttons-group'
               onChange={e =>
                 handle({
@@ -54,7 +58,8 @@ const DialogContent: React.FC<DialogContentProps> = props => {
             label={(diagnosisData.input as any)?.label}
             multiline={(diagnosisData.input as any)?.multiline}
             required={(diagnosisData.input as any)?.required}
-            value={initialValue}
+            value={currentVal.value}
+            name='input'
             onChange={e =>
               handle({
                 question_id: diagnosisData._id,
@@ -67,7 +72,7 @@ const DialogContent: React.FC<DialogContentProps> = props => {
           <TextInput
             label={(diagnosisData.input as any)?.label}
             required={(diagnosisData.input as any)?.required}
-            value={initialValue}
+            value={currentVal.value}
             onChange={e =>
               handle({
                 question_id: diagnosisData._id,
@@ -75,13 +80,15 @@ const DialogContent: React.FC<DialogContentProps> = props => {
                 value: e.target.value,
               })
             }
+            name='email'
           />
         ) : diagnosisData.type === 'phone' ? (
           <TextInput
+            name='phone'
             label={(diagnosisData.input as any)?.label}
             required={(diagnosisData.input as any)?.required}
             type='number'
-            value={initialValue}
+            value={currentVal.value}
             onChange={e =>
               handle({
                 question_id: diagnosisData._id,

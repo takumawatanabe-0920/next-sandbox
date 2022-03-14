@@ -83,7 +83,7 @@ const noop = () => {
 
 BasicDialog.defaultProps = {
   muiClasses: {},
-  onOpened: noop,
+  onSubmit: noop,
   onClose: noop,
 }
 
